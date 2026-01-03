@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import "./App.css";
-import Card from "./queryOptions/Card";
+import Card from "./Card";
 // queryOptions extracted into separate ts file to be reusable
 
 function App() {

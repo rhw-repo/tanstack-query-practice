@@ -9,7 +9,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   gap: 2rem;
 }
 
@@ -25,8 +25,14 @@ button:hover {
 .card {
   border: 1px solid #677dd1;
   padding: 1rem;
+  text-align: start;
 }
 
-.card-header {
+.card__header {
   color: #677dd1;
+  text-align: center;
+}
+
+.card__body {
+  white-space: pre-wrap;
 }

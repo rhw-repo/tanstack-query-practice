@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import createTodoQueryOptions from "./createTodoQueryOptions";
+import createTodoQueryOptions from "./queryOptions/createTodoQueryOptions";
 
 /* 
 useQuery data prop behaves as <specified> | undefined
@@ -14,10 +14,21 @@ as enabled is not an intristic prop
 
 export default function Card() {
   const { data } = useSuspenseQuery(createTodoQueryOptions());
+  const prettyPrint = data
+    ? data
+        .slice(0, 10)
+        .map((item) =>
+          // Stringify with indentation
+          JSON.stringify(item, null, 2).replace(/\\n/g, " ")
+        )
+        // Blank line between items
+        .join("\n\n")
+    : "";
+
   return (
     <div className="card">
-      <h1 className="card-header">CARD</h1>
-      {JSON.stringify(data?.slice(0, 10))}
+      <h1 className="card__header">CARD</h1>
+      <pre className="card__body">{prettyPrint}</pre>
     </div>
   );
 }

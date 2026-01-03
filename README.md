@@ -1,6 +1,8 @@
 # React Query
 
-A repo created for implementing Tanstack Query ("React Query") into a React app running in Vite.
+An app created to walkthrough implementing various hooks & options of Tanstack Query ("React Query") into a React app running in Vite.\
+Brief concept explanations in comments.\
+Examples from [Austin Davis](https://www.youtube.com/watch?v=mPaCnwpFvZY&t=447s)
 
 ---
 
