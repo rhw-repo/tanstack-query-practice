@@ -4,3 +4,20 @@
   padding: 2rem;
   text-align: center;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+button {
+  border: 1px solid white;
+}
+
+button:hover {
+  background-color: #4d4d4d;
+  border: 2px solid white;
+}
