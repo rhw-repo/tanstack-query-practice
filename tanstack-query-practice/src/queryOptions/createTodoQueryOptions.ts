@@ -12,7 +12,7 @@ export default function createTodoQueryOptions() {
   });
 }
 
-const getTodos = async (/*id: number*/) => {
+const getTodos = async (/*id: number*/): Promise<Todo[]> => {
   /* Simulate a slow fetch and be able to view template 
   rendered when isPending is true */
   await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -20,4 +20,11 @@ const getTodos = async (/*id: number*/) => {
     `https://jsonplaceholder.typicode.com/comments?postId=${1}`
   );
   return await response.json();
+};
+
+type Todo = {
+  useId: number;
+  id: number;
+  title: string;
+  completed: boolean;
 };

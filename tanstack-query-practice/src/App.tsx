@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { Suspense } from "react";
 import "./App.css";
+import Card from "./queryOptions/Card";
 // queryOptions extracted into separate ts file to be reusable
-import createTodoQueryOptions from "./queryOptions/createTodoQueryOptions";
 
 function App() {
   /* useQuery hook is imported from TanstackQuery, takes in 1 primary argument:
@@ -12,31 +12,27 @@ function App() {
   key, such as your API call (fetch, axios, etc)
   */
 
-  const { data, isPending, refetch, error } = useQuery(
-    createTodoQueryOptions()
-  );
-
-  if (error) {
-    alert("Something went wrong");
-  }
-
   return (
     <main>
-      <div>
-        {isPending ? (
-          <span>Loading...</span>
-        ) : (
-          JSON.stringify(data.slice(0, 10))
-        )}
-      </div>
-      <button onClick={() => refetch()}>Refetch</button>
+      {/* if suspense query not yet resolved render fallback */}
+      <Suspense fallback={<>Loading...</>}>
+        <Card />
+      </Suspense>
     </main>
   );
 }
 
 export default App;
 
+/* TypeScript note: 
+React Query property data has type any, TS cannot catch error
+Workaround = Specify  type in query function 
+See type for Todos in createQueryOptions.ts
+
+More complex apps may use helpers such as Zod to perform
+runtime validation for you types 
 /* 
+
 isFetching runs whenever the function is running at all 
 isPending runs if there's no cache data 
 isLoading runs when query is loading for the very first time 
