@@ -9,16 +9,25 @@ function App() {
   key, such as your API call (fetch, axios, etc)
   */
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, refetch } = useQuery({
+    // query will be cached using it's queryKey
     queryKey: ["todos"],
     // queryFn is not called by this hook, just pass it
     queryFn: getTodos,
   });
 
   return (
-    <div>
-      {isPending ? <span>Loading...</span> : JSON.stringify(data.slice(0, 10))}
-    </div>
+    <main>
+      <div>
+        {isPending ? (
+          <span>Loading...</span>
+        ) : (
+          JSON.stringify(data.slice(0, 10))
+        )}
+      </div>
+      // Already
+      <button onClick={() => refetch()}>Refetch</button>
+    </main>
   );
 }
 
@@ -29,4 +38,11 @@ const getTodos = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/todos");
   return await response.json();
 };
+
 export default App;
+
+/* 
+isFetching runs whenever the function is running at all 
+isPending runs if there's no cache data 
+isLoading runs when query is loading for the very first time 
+*/
